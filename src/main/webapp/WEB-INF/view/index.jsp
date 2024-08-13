@@ -11,6 +11,15 @@
     <title>Title</title>
 </head>
 <body>
-<h1>title</h1>
+<h1>홈페이지</h1>
+<%--public String index(Model model) {model.addAttribute("message","홈페이지 방문을 환영합니다.");--%>
+<%--return "index";--%>
+<p>${message}</p>
+<h3>메뉴</h3>
+<ul>
+    <li><a href="/user/register">회원가입</a> </li>
+    <li><a href="/login">로그인</a> </li>
+    <li><a href="/logout">로그아웃</a> </li>
+</ul>
 </body>
 </html>
