@@ -1,7 +1,11 @@
 package com.example.demo.cofig;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 /*UserDetails /인터페이스
@@ -9,9 +13,12 @@ import java.util.Collection;
   스프링 시큐리티를 사용해서 인가/ 인능 가능 을 구현할 때는
 
  */
-public class CustomUserDetails implements UserDetails {
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetails implements UserDetailsService {
     private String username;
     private String password;
+    public void setUsername(String username)
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -46,5 +53,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

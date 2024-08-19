@@ -30,7 +30,11 @@ public class SecurityConfig {
                         .loginPage("/user/login")//로그인폼으로 이동하는 url
                         .loginProcessingUrl("/user/login")//로그인처리를 요청하는 url
                         .defaultSuccessUrl("/")//로그인 성공시 이동하는 url
-                        .failureUrl("/user/login?error=fail"));
+                        .failureUrl("/user/login?error=fail"))
+                .logout(logout -> logout
+                        .invalidateHttpSession(true)
+                        .logoutUrl("/user/logout")
+                        .logoutSuccessUrl("/"));
         return http.build();
 
     }
