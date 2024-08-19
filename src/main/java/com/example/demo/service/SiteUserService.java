@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.SiteUser;
-import com.example.demo.form.UserResisterForm;
+import com.example.demo.form.UserRegisterForm;
 import com.example.demo.repository.SiteUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class SiteUserService {
     private final PasswordEncoder passwordEncoder;
     public final SiteUserRepository siteUserRepository;
-    public void addUser(UserResisterForm form){
+    public void addUser(UserRegisterForm form){
         Optional<SiteUser> optional = siteUserRepository.findByUsername(form.getUsername());
         if(optional.isPresent()){
             throw new RuntimeException("이미 사용중인 아이디입니다.");

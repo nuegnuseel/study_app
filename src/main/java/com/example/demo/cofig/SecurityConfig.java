@@ -2,6 +2,7 @@ package com.example.demo.cofig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,12 +19,18 @@ import org.springframework.security.web.SecurityFilterChain;
 //filterChain 메소드에서 이 애플리케이션과 관련된 전반적인 설정을 수행하고 그 설정을 기반으로 SecurityFilterChain 객체를 생성해서 반환
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorizationManagerRequests -> authorizationManagerRequests.requestMatchers("/**").permitAll());
+                .authorizeHttpRequests(authorizationManagerRequests -> authorizationManagerRequests.requestMatchers("/**").permitAll())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/user/login")//로그인폼으로 이동하는 url
+                        .loginProcessingUrl("/user/login")//로그인처리를 요청하는 url
+                        .defaultSuccessUrl("/")//로그인 성공시 이동하는 url
+                        .failureUrl("/user/login?error=fail"));
         return http.build();
 
     }

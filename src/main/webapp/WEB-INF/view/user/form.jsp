@@ -1,28 +1,42 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jhta
-  Date: 2024-08-13
-  Time: 오후 7:49
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 </head>
 <body>
-<h1>회원가입</h1>
-<form method="post" action="register">
-<label>아이디</label>
-<input type="text" name="username"><br>
-<label>비밀번호</label>
-<input type="text" name="password"><br>
-<label>닉네임</label>
-<input type="text" name="nick"><br>
-<label>이메일</label>
-<input type="text" name="email"><br>
-<button type="submit">가입</button>
-</form>
+<%@ include file="../common/menu.jsp" %>
 
+<h1>회원가입폼</h1>
+<form:form method="post" action="register" modelAttribute="userRegisterForm">
+    <div>
+        <label>아이디</label>
+        <form:input type="text" path="username" /><br>
+        <form:errors path="username" cssStyle="color:red;"></form:errors>
+    </div>
+
+    <div>
+        <label>비밀번호</label>
+        <form:input type="text" path="password" /><br>
+        <form:errors path="password" cssStyle="color:red;"></form:errors>
+    </div>
+
+    <div>
+        <label>닉네임</label>
+        <form:input type="text" path="nick" /><br>
+        <form:errors path="nick" cssStyle="color:red;"></form:errors>
+    </div>
+
+    <div>
+        <label>이메일</label>
+        <form:input type="text" path="email" /><br>
+        <form:errors path="email" cssStyle="color:red;"></form:errors>
+    </div>
+
+    <button type="submit">가입</button>
+</form:form>
 </body>
 </html>
